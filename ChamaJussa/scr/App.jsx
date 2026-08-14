@@ -4,6 +4,7 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { styles } from './Style';
 import { Login } from './pages/login/login';
+import { CriarOS} from './pages/criarOS/criarOS'
 
 
 
@@ -15,7 +16,7 @@ export default function App() {
 
      <View style={styles.container}>
 
-      <Login/>
+      <CriarOS/>
       
       <StatusBar style="auto" />
 
