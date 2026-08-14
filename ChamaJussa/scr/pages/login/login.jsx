@@ -1,44 +1,54 @@
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { LoginStyle } from "./loginStyle";
+import LogoChamaJussa from "../../../assets/Jussa Logo.png"
+
 
 export function Login () {
 
 
 
     return(
-    <>
-    
-      <main className='main-section'>
+   <View style={LoginStyle.main_section}>
+    <figure style={LoginStyle.figure_section}>
+    <img style={LoginStyle.figure_section__img} src={LogoChamaJussa} alt="Logo Chama Jussa" />
+    </figure>
+   
+    <section style={LoginStyle.section_card}>
 
-        <figure className='figure-section'>
-          <img className='figure-section__img' src={logo} alt="Logo" />
-        </figure>
+        <div style={LoginStyle.teste}>
 
+        <header style={LoginStyle.header_section}>
 
-        <section className='section-card'>
+         <Text style={LoginStyle.header_section__tittle}></Text>
 
-          <div className='teste'>
+         <Text style={LoginStyle.header_section__subtittle}></Text>
 
-            <header className='header-section'>
+        </header>
 
-              <h2 className='header-section__tittle'>Chama Jussa</h2>
-              <p className='header-section__subtittle'>Gerenciamento de Ordens de Serviço</p>
-            </header>
+        <form action="" style={LoginStyle.login_user}>
 
-            <form action="" className='login-user'>
-              <strong className='login-user__text'>E-mail</strong>
-              <input type="text" className='login-user__input' placeholder='email@email.com' />
-              <strong className='login-user__text'>Senha</strong>
-              <input type="password" className='login-user__input' placeholder='Digite sua senha' />
-              <button className='login-user__button'> Acessar o Sistema</button>
+        <TextInput
+        style={LoginStyle.login_user__input}
+        placeholder="E-mail"
+        value=""
+        onChangeText=''
+        />
+        <TextInput
+        style={LoginStyle.login_user__input}
+        placeholder="Senha"
+        value=""
+        onChangeText=''
+        />
+        <TouchableOpacity style={LoginStyle.login_user__button}>
+        Entrar
+        </TouchableOpacity>
 
-            </form>
-          </div>
+        </form>
 
-        </section>
-      </main>
+        </div>
 
-      <form action=""></form>
-      
-    </>
+    </section>
+
+   </View>
     )
 }
