@@ -1,16 +1,18 @@
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LoginStyle } from "./loginStyle";
-import LogoChamaJussa from "../../../assets/Jussa Logo.png"
+import { useState } from "react";
 
 
 export function Login () {
 
+   const [emailDigitado, SetemailDigitado] = useState("")
 
+   const [SenhaDigitada, SetSenhaDigitada] = useState("")
 
     return(
    <View style={LoginStyle.main_section}>
     <figure style={LoginStyle.figure_section}>
-    <img style={LoginStyle.figure_section__img} src={LogoChamaJussa} alt="Logo Chama Jussa" />
+    <Image style={LoginStyle.figure_section__img} source={require("../../../assets/Jussa-Logo.png")} />
     </figure>
    
     <section style={LoginStyle.section_card}>
@@ -19,28 +21,40 @@ export function Login () {
 
         <header style={LoginStyle.header_section}>
 
-         <Text style={LoginStyle.header_section__tittle}></Text>
-
-         <Text style={LoginStyle.header_section__subtittle}></Text>
+         <Text style={LoginStyle.header_section__tittle}>Chama Jussa</Text>
+         <br />
+         <Text style={LoginStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
 
         </header>
 
         <form action="" style={LoginStyle.login_user}>
 
+        <Text style={LoginStyle.text_input}>Email</Text>
+
+        <br />
+        
         <TextInput
         style={LoginStyle.login_user__input}
-        placeholder="E-mail"
-        value=""
-        onChangeText=''
+        placeholder="Digite seu Email"
+        value={emailDigitado}
+        onChangeText={SetemailDigitado}
         />
+
+        <br />
+
+        <Text style={LoginStyle.text_input}>Senha</Text>
+        <br />
         <TextInput
         style={LoginStyle.login_user__input}
-        placeholder="Senha"
-        value=""
-        onChangeText=''
+        placeholder="Digite sua Senha"
+        value={SenhaDigitada}
+        onChangeText={SetSenhaDigitada}
         />
+
         <TouchableOpacity style={LoginStyle.login_user__button}>
-        Entrar
+
+        <Text style={LoginStyle.login_user__button_text}>Acessar o sistema</Text>
+
         </TouchableOpacity>
 
         </form>
