@@ -29,7 +29,7 @@ export function Login () {
 
         <form action="" style={LoginStyle.login_user}>
 
-        <Text style={LoginStyle.text_input}>Email</Text>
+        <Text style={LoginStyle.text_input}>E-mail</Text>
 
         <br />
         

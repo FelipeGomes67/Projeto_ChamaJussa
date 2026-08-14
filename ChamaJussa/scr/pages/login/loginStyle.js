@@ -7,9 +7,9 @@ export const LoginStyle = StyleSheet.create({
     resizeMode: "contain",
   },
   text_input : {
-    
+    fontWeight: 750,
     fontSize: 12,
-    color: "rgba(0, 0, 0, 0.67)",
+    color: "#000",
     
   },
   main_section: {
@@ -28,11 +28,6 @@ export const LoginStyle = StyleSheet.create({
     padding: 16,
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
   },
   header_section: {
     width: "100%",
@@ -74,7 +69,7 @@ export const LoginStyle = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#F3F4F6",
     borderWidth: 1,
-    borderColor: "#535353",
+    borderColor: "#53535346",
     marginBottom: 15,
     paddingHorizontal: 10,
     color: "#000000",
