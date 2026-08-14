@@ -36,6 +36,7 @@ export function Login () {
         <TextInput
         style={LoginStyle.login_user__input}
         placeholder="Digite seu Email"
+        placeholderTextColor="#0000005d"
         value={emailDigitado}
         onChangeText={SetemailDigitado}
         />
@@ -47,6 +48,7 @@ export function Login () {
         <TextInput
         style={LoginStyle.login_user__input}
         placeholder="Digite sua Senha"
+        placeholderTextColor="#0000005d"
         value={SenhaDigitada}
         onChangeText={SetSenhaDigitada}
         />
