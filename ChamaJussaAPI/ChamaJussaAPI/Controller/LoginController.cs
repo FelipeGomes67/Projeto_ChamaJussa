@@ -1,5 +1,6 @@
 ﻿using ChamaJussaAPI.DTOs;
 using ChamaJussaAPI.Interfaces;
+using ChamaJussaAPI.Utils; 
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChamaJussaAPI.Controllers;
@@ -23,23 +24,26 @@ public class LoginController : ControllerBase
 
         var usuario = await _usuarioRepository.ObterPorEmailAsync(loginDto.Email);
 
-        if (usuario == null || usuario.Senha != loginDto.Senha)
+        if (usuario != null)
         {
-            return Unauthorized(new { mensagem = "E-mail ou senha inválidos." });
+            bool senhaValida = Criptografia.CompararHash(loginDto.Senha, usuario.Senha);
+
+            if (senhaValida)
+            {
+                return Ok(new
+                {
+                    mensagem = "Login realizado com sucesso!",
+                    tipoUsuario = usuario.TipoUsuario,
+                    usuario = new
+                    {
+                        id = usuario.IdUsuario,
+                        nome = usuario.Nome,
+                        email = usuario.Email
+                    }
+                });
+            }
         }
 
-        var usuarioDto = new UsuarioDto
-        {
-            IdUsuario = usuario.IdUsuario,
-            Nome = usuario.Nome,
-            Email = usuario.Email,
-            TipoUsuario = usuario.TipoUsuario
-        };
-
-        return Ok(new
-        {
-            mensagem = "Login efetuado com sucesso!",
-            usuario = usuarioDto
-        });
+        return Unauthorized(new { mensagem = "E-mail ou senha inválidos." });
     }
 }

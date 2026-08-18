@@ -27,7 +27,7 @@ public partial class ChamaJussaDbContext : DbContext
     {
         modelBuilder.Entity<OrdemServico>(entity =>
         {
-            entity.HasKey(e => e.IdOs).HasName("PK__OrdemSer__B770330F3B7C9A31");
+            entity.HasKey(e => e.IdOs).HasName("PK__OrdemSer__B770330FC7FEFAC5");
 
             entity.ToTable("OrdemServico");
 
@@ -47,11 +47,11 @@ public partial class ChamaJussaDbContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF97090EA3A1");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF976D466482");
 
             entity.ToTable("Usuario");
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534507EBDF9").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534405AAA09").IsUnique();
 
             entity.Property(e => e.IdUsuario).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Email)

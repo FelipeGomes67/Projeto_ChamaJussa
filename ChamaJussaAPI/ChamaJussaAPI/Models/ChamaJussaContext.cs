@@ -35,14 +35,11 @@ public partial class ChamaJussaContext : DbContext
                 .HasMaxLength(40)
                 .IsUnicode(false)
                 .HasColumnName("IdOS");
-            entity.Property(e => e.DataHora)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
             entity.Property(e => e.Imagem)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Local).HasMaxLength(100);
-            entity.Property(e => e.Maquina).HasMaxLength(100);
+            entity.Property(e => e.Equipamento).HasMaxLength(100);
             entity.Property(e => e.Titulo).HasMaxLength(100);
         });
 

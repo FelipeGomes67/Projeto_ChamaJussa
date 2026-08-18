@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\52611156808\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj": {}
+    "C:\\Users\\felipe\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\52611156808\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj": {
+    "C:\\Users\\felipe\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\52611156808\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\felipe\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj",
         "projectName": "ChamaJussaAPI",
-        "projectPath": "C:\\Users\\52611156808\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj",
-        "packagesPath": "C:\\Users\\52611156808\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\52611156808\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\obj\\",
+        "projectPath": "C:\\Users\\felipe\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\ChamaJussaAPI.csproj",
+        "packagesPath": "C:\\Users\\felipe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felipe\\Desktop\\Projeto_ChamaJussa\\ChamaJussaAPI\\ChamaJussaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\52611156808\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -56,25 +56,33 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.11, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[10.0.10, )"
+              "version": "[10.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.10, )"
+              "version": "[10.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[10.0.10, )"
+              "version": "[10.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.10, )"
+              "version": "[10.0.11, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.2.3, )"
             }
           },
           "imports": [
@@ -96,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400-preview.0.26322.102/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

@@ -4,7 +4,6 @@ namespace ChamaJussaAPI.DTOs;
 
 public class UsuarioDto
 {
-    public Guid IdUsuario { get; set; }
 
     [Required(ErrorMessage = "O nome é obrigatório.")]
     [StringLength(100, ErrorMessage = "O nome não pode exceder 100 caracteres.")]

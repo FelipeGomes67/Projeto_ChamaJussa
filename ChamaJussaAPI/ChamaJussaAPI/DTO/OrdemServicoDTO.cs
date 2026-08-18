@@ -4,7 +4,6 @@ namespace ChamaJussaAPI.DTOs;
 
 public class OrdemServicoDto
 {
-    public Guid IdOS { get; set; }
 
     [Required(ErrorMessage = "O título é obrigatório.")]
     [StringLength(100, ErrorMessage = "O título não pode ter mais de 100 caracteres.")]
@@ -22,7 +21,7 @@ public class OrdemServicoDto
     public string Descricao { get; set; } = null!;
 
     [Required(ErrorMessage = "A imagem é obrigatória.")]
-    public string Imagem { get; set; } = null!;
+    public IFormFile Imagem { get; set; } = null!;
 
     public string Status { get; set; } = "Aberto";
 }

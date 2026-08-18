@@ -17,46 +17,49 @@ public class OrdemServicoController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Cadastrar([FromBody] OrdemServicoDto ordemServicoDto)
+    public async Task<IActionResult> Cadastrar([FromForm] OrdemServicoDto ordemServicoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
+        string caminhoImagem = string.Empty;
+        if (ordemServicoDto.Imagem != null && ordemServicoDto.Imagem.Length > 0)
+        {
+            var pastaUploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(pastaUploads))
+                Directory.CreateDirectory(pastaUploads);
+
+            var nomeArquivo = $"{Guid.NewGuid()}{Path.GetExtension(ordemServicoDto.Imagem.FileName)}";
+            var caminhoCompleto = Path.Combine(pastaUploads, nomeArquivo);
+
+            using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+            {
+                await ordemServicoDto.Imagem.CopyToAsync(stream);
+            }
+
+            caminhoImagem = $"/uploads/{nomeArquivo}";
+        }
+
         var os = new OrdemServico
         {
-            IdOs = Guid.NewGuid(),
             Titulo = ordemServicoDto.Titulo,
             Equipamento = ordemServicoDto.Equipamento,
             Local = ordemServicoDto.Local,
             Descricao = ordemServicoDto.Descricao,
-            Imagem = ordemServicoDto.Imagem,
+            Imagem = caminhoImagem,
             Status = string.IsNullOrWhiteSpace(ordemServicoDto.Status) ? "Aberto" : ordemServicoDto.Status
         };
 
         await _ordemServicoRepository.CadastrarAsync(os);
 
-        ordemServicoDto.IdOS = os.IdOs;
-
-        return CreatedAtAction(nameof(ObterPorId), new { id = os.IdOs }, ordemServicoDto);
+        return CreatedAtAction(nameof(ObterPorId), new { id = os.IdOs }, os);
     }
 
     [HttpGet]
     public async Task<IActionResult> Listar()
     {
         var ordens = await _ordemServicoRepository.ListarAsync();
-
-        var listaDto = ordens.Select(os => new OrdemServicoDto
-        {
-            IdOS = os.IdOs,
-            Titulo = os.Titulo,
-            Equipamento = os.Equipamento,
-            Local = os.Local,
-            Descricao = os.Descricao,
-            Imagem = os.Imagem,
-            Status = os.Status
-        }).ToList();
-
-        return Ok(listaDto);
+        return Ok(ordens);
     }
 
     [HttpGet("{id:guid}")]
@@ -66,22 +69,11 @@ public class OrdemServicoController : ControllerBase
         if (os == null)
             return NotFound(new { mensagem = "Ordem de Serviço não encontrada." });
 
-        var dto = new OrdemServicoDto
-        {
-            IdOS = os.IdOs,
-            Titulo = os.Titulo,
-            Equipamento = os.Equipamento,
-            Local = os.Local,
-            Descricao = os.Descricao,
-            Imagem = os.Imagem,
-            Status = os.Status
-        };
-
-        return Ok(dto);
+        return Ok(os);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Atualizar(Guid id, [FromBody] OrdemServicoDto ordemServicoDto)
+    public async Task<IActionResult> Atualizar(Guid id, [FromForm] OrdemServicoDto ordemServicoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -90,11 +82,27 @@ public class OrdemServicoController : ControllerBase
         if (os == null)
             return NotFound(new { mensagem = "Ordem de Serviço não encontrada." });
 
+        if (ordemServicoDto.Imagem != null && ordemServicoDto.Imagem.Length > 0)
+        {
+            var pastaUploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(pastaUploads))
+                Directory.CreateDirectory(pastaUploads);
+
+            var nomeArquivo = $"{Guid.NewGuid()}{Path.GetExtension(ordemServicoDto.Imagem.FileName)}";
+            var caminhoCompleto = Path.Combine(pastaUploads, nomeArquivo);
+
+            using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+            {
+                await ordemServicoDto.Imagem.CopyToAsync(stream);
+            }
+
+            os.Imagem = $"/uploads/{nomeArquivo}";
+        }
+
         os.Titulo = ordemServicoDto.Titulo;
         os.Equipamento = ordemServicoDto.Equipamento;
         os.Local = ordemServicoDto.Local;
         os.Descricao = ordemServicoDto.Descricao;
-        os.Imagem = ordemServicoDto.Imagem;
         os.Status = ordemServicoDto.Status;
 
         await _ordemServicoRepository.AtualizarAsync(os);

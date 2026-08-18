@@ -1,6 +1,8 @@
 ﻿using ChamaJussaAPI.DTOs;
 using ChamaJussaAPI.Interfaces;
 using ChamaJussaAPI.Models;
+using ChamaJussaAPI.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChamaJussaAPI.Controllers;
@@ -31,50 +33,55 @@ public class UsuarioController : ControllerBase
 
         var usuario = new Usuario
         {
-            IdUsuario = Guid.NewGuid(),
             Nome = usuarioDto.Nome,
             Email = usuarioDto.Email,
-            Senha = usuarioDto.Senha, 
+            Senha = Criptografia.GerarHash(usuarioDto.Senha),
             TipoUsuario = string.IsNullOrWhiteSpace(usuarioDto.TipoUsuario) ? "Comum" : usuarioDto.TipoUsuario
         };
 
         await _usuarioRepository.CadastrarAsync(usuario);
 
-        usuarioDto.IdUsuario = usuario.IdUsuario;
-        usuarioDto.Senha = null;
+        var respostaDto = new
+        {
+            usuario.IdUsuario,
+            usuario.Nome,
+            usuario.Email,
+            usuario.TipoUsuario
+        };
 
-        return CreatedAtAction(nameof(ObterPorId), new { id = usuario.IdUsuario }, usuarioDto);
+        return CreatedAtAction("ObterPorId", new { id = usuario.IdUsuario }, respostaDto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Listar()
+    public async Task<IActionResult> ListarAsync()
     {
         var usuarios = await _usuarioRepository.ListarAsync();
 
-        var listaDto = usuarios.Select(u => new UsuarioDto
+        var listaDto = usuarios.Select(u => new
         {
-            IdUsuario = u.IdUsuario,
-            Nome = u.Nome,
-            Email = u.Email,
-            TipoUsuario = u.TipoUsuario
+            u.IdUsuario,
+            u.Nome,
+            u.Email,
+            u.TipoUsuario
         }).ToList();
 
         return Ok(listaDto);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> ObterPorId(Guid id)
+    [HttpGet("{id:guid}", Name = "ObterPorId")]
+    [Authorize]
+    public async Task<IActionResult> ObterPorIdAsync(Guid id)
     {
         var usuario = await _usuarioRepository.ObterPorIdAsync(id);
         if (usuario == null)
             return NotFound(new { mensagem = "Usuário não encontrado." });
 
-        var dto = new UsuarioDto
+        var dto = new
         {
-            IdUsuario = usuario.IdUsuario,
-            Nome = usuario.Nome,
-            Email = usuario.Email,
-            TipoUsuario = usuario.TipoUsuario
+            usuario.IdUsuario,
+            usuario.Nome,
+            usuario.Email,
+            usuario.TipoUsuario
         };
 
         return Ok(dto);
@@ -96,7 +103,7 @@ public class UsuarioController : ControllerBase
 
         if (!string.IsNullOrWhiteSpace(usuarioDto.Senha))
         {
-            usuario.Senha = usuarioDto.Senha;
+            usuario.Senha = Criptografia.GerarHash(usuarioDto.Senha);
         }
 
         await _usuarioRepository.AtualizarAsync(usuario);

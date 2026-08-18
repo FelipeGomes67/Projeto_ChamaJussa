@@ -1,5 +1,7 @@
 ﻿using ChamaJussaAPI.DTOs;
 using ChamaJussaAPI.Interfaces;
+using ChamaJussaAPI.Services;
+using ChamaJussaAPI.Utils; // Adicionado para acessar o Criptografia
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChamaJussaAPI.Controllers;
@@ -9,33 +11,38 @@ namespace ChamaJussaAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly ITokenService _tokenService;
 
-    public AuthController(IUsuarioRepository usuarioRepository)
+    public AuthController(
+        IUsuarioRepository usuarioRepository,
+        ITokenService tokenService)
     {
         _usuarioRepository = usuarioRepository;
+        _tokenService = tokenService;
     }
 
-    [HttpGet("me/{id:guid}")]
-    public async Task<IActionResult> ObterUsuarioAutenticado(Guid id)
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        var usuario = await _usuarioRepository.ObterPorIdAsync(id);
-        if (usuario == null)
-            return NotFound(new { mensagem = "Sessão inválida ou usuário não encontrado." });
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        var usuarioDto = new UsuarioDto
+        var usuario = await _usuarioRepository.ObterPorEmailAsync(dto.Email);
+
+        if (usuario != null && Criptografia.CompararHash(dto.Senha, usuario.Senha))
         {
-            IdUsuario = usuario.IdUsuario,
-            Nome = usuario.Nome,
-            Email = usuario.Email,
-            TipoUsuario = usuario.TipoUsuario
-        };
+            var token = _tokenService.GerarToken(usuario.IdUsuario, usuario.Nome, usuario.Email, usuario.TipoUsuario);
 
-        return Ok(usuarioDto);
-    }
+            return Ok(new LoginRespostaDto
+            {
+                Id = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                TipoUsuario = usuario.TipoUsuario,
+                Token = token
+            });
+        }
 
-    [HttpPost("logout")]
-    public IActionResult Logout()
-    {
-        return Ok(new { mensagem = "Logout realizado com sucesso!" });
+        return Unauthorized(new { mensagem = "E-mail ou senha inválidos." });
     }
 }
