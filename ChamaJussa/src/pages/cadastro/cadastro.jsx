@@ -1,4 +1,5 @@
-import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Image, } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { CadastroStyle } from "./cadastroStyle";
 import { useState } from "react";
 
@@ -6,6 +7,17 @@ export function Cadastro({ navigation }) {
     const [emailDigitado, setEmailDigitado] = useState("");
     const [usuarioDigitado, setUsuarioDigitado] = useState("");
     const [senhaDigitada, setSenhaDigitada] = useState("");
+    const [tipodeusuario, setTipodeusuario] = useState('usuario');
+
+    /*const [tiposDeUsuario, settiposDeUsuario] = useState([]);*/
+
+
+    const tiposDeUsuario = [
+        { id: 1, label: "Selecione...", value: "" },
+        { id: 2, label: "Padrão", value: "usuario" },
+        { id: 3, label: "Técnico", value: "tecnico" }
+    ];
+    
 
     return (
         <View style={CadastroStyle.main_section}>
@@ -14,7 +26,7 @@ export function Cadastro({ navigation }) {
                     style={CadastroStyle.figure_section__img} 
                     source={require("../../../assets/Jussa-Logo.png")} 
                 />
-            </View>
+            </View> 
 
             <View style={CadastroStyle.section_card}>
                 <View style={CadastroStyle.teste}>
@@ -53,6 +65,22 @@ export function Cadastro({ navigation }) {
                             value={senhaDigitada}
                             onChangeText={setSenhaDigitada}
                         />
+
+                        <Text style={CadastroStyle.text_input}>Tipo de Usuário</Text>
+                        <Picker
+                            selectedValue={tipodeusuario}
+                            onValueChange={(itemValue) => setTipodeusuario(itemValue)}
+                            style={CadastroStyle.login_user__input}
+                        >
+                            {tiposDeUsuario.map((tipo) => (
+                                <Picker.Item key={tipo.id} label={tipo.label} value={tipo.value} />
+                            ))}
+                        </Picker>
+
+                        <Text style={CadastroStyle.text_input}>Foto de Perfil</Text>
+                        <TouchableOpacity style={CadastroStyle.login_user__input}>
+                                <Text style={CadastroStyle.login_user__button_text_image}>Insira imagem</Text>
+                        </TouchableOpacity>
 
                         <TouchableOpacity 
                             style={CadastroStyle.login_user__button} 
