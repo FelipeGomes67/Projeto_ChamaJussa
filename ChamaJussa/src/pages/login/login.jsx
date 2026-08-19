@@ -2,20 +2,10 @@ import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LoginStyle } from "./loginStyle";
 import { useState } from "react";
 
-<<<<<<< Updated upstream
-
-export function Login() {
-
-
-    const [emailDigitado, SetemailDigitado] = useState("")
-
-    const [SenhaDigitada, SetSenhaDigitada] = useState("")
-=======
 export function Login({ navigation }) {
     const [emailDigitado, setEmailDigitado] = useState("");
     const [senhaDigitada, setSenhaDigitada] = useState("");
 
->>>>>>> Stashed changes
 
 
     return (
@@ -79,25 +69,9 @@ export function Login({ navigation }) {
 
 
 
-<<<<<<< Updated upstream
                     </View>
-=======
-
-                        <TouchableOpacity
-                            style={LoginStyle.login_user__button_Cadastro}
-                            onPress={() => navigation.navigate('Cadastro')}
-                        >
-                            <Text style={LoginStyle.login_user__textCadastroButton}>Cadastre-se</Text>
-                        </TouchableOpacity>
-                    </View>
-
->>>>>>> Stashed changes
                 </View>
             </View>
         </View>
     )
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 }
