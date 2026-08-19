@@ -9,12 +9,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Login } from './pages/login/login';
 import { CriarOS } from './pages/criarOS/criarOS'
+import { Cadastro } from './pages/cadastro/cadastro'
 import { PainelNotificacoes } from './pages/painelNotificacoes/painelNotificacoes';
 
 
 import { CriarOS } from './pages/criarOS/criarOS';
 import { Cadastro } from './pages/cadastro/cadastro';
 import { MinhasOS } from './pages/minhasOS/minhasOS';
+
 
 const Stack = createNativeStackNavigator()
 
@@ -33,7 +35,7 @@ export default function App() {
         </View>
 
       </SafeAreaView>
-        <StatusBar style="auto" />
+        {/* <StatusBar style="auto" />
         <NavigationContainer>
 
           <Stack.Navigator
@@ -49,7 +51,7 @@ export default function App() {
             <Stack.Screen name="MinhasOS" component={MinhasOS} />
 
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
     </SafeAreaProvider>
 
   );

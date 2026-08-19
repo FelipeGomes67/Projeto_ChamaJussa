@@ -8,7 +8,7 @@ export function Footer() {
             {/* Minhas OS */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/Minhas-OS.png")}
+                    source={require("../../../assets/Minhas-OS.png")}
                     style={FooterStyle.Icone}
                 />
                 <Text style={FooterStyle.Label}>
@@ -16,18 +16,10 @@ export function Footer() {
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={FooterStyle.Item}>
-                <Image
-                    source={require("../../../assets/Criar OS.png")}
-                    style={FooterStyle.Icone}
-                />
-                <Text>Criar OS</Text>
-            </TouchableOpacity>
-
             {/* Criar OS */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/Criar OS.png")}
+                    source={require("../../../assets/Criar OS.png")}
                     style={FooterStyle.Icone}
                 />
                 <Text style={FooterStyle.Label}>
@@ -38,7 +30,7 @@ export function Footer() {
             {/* Notificações */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/Notificacao.png")}
+                    source={require("../../../assets/Notificacao.png")}
                     style={FooterStyle.Icone}
                 />
                 <Text style={FooterStyle.Label}>
@@ -49,7 +41,7 @@ export function Footer() {
             {/* Perfil */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/Perfil.png")}
+                    source={require("../../../assets/Perfil.png")}
                     style={FooterStyle.Icone}
                 />
                 <Text style={FooterStyle.Label}>
