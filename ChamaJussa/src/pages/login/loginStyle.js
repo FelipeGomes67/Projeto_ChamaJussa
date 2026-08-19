@@ -30,11 +30,7 @@ export const LoginStyle = StyleSheet.create({
     borderRadius: 5,
   },
   header_section: {
-    width: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    flexDirection: "column",
     paddingTop: 8,
     paddingBottom: 12,
   },

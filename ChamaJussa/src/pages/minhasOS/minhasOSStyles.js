@@ -222,4 +222,56 @@ export const MinhasOSStye = StyleSheet.create({
     modal_scroll_content: {
         paddingBottom: 24,
     },
+    input_label: {
+        fontSize: 13,
+        fontWeight: "bold",
+        color: "#444444",
+        marginBottom: 6,
+        marginTop: 10,
+    },
+    input: {
+        backgroundColor: "#F3F4F6",
+        borderWidth: 1,
+        borderColor: "#D1D5DB",
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 10,
+        fontSize: 14,
+        color: "#000000",
+    },
+    input_multiline: {
+        height: 90,
+        textAlignVertical: "top",
+    },
+    edit_actions_row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        gap: 12,
+        marginTop: 16,
+    },
+    action_button: {
+        flex: 1,
+        paddingVertical: 12,
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    cancel_button: {
+        backgroundColor: "#E5E7EB",
+        borderWidth: 1,
+        borderColor: "#D1D5DB",
+    },
+    cancel_button_text: {
+        color: "#374151",
+        fontWeight: "bold",
+        fontSize: 15,
+    },
+    save_button: {
+        backgroundColor: "#006FFF",
+    },
+    save_button_text: {
+        color: "#FFFFFF",
+        fontWeight: "bold",
+        fontSize: 15,
+    },
 })

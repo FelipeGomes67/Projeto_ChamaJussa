@@ -9,7 +9,7 @@ export const PerfilStyle = StyleSheet.create({
     Image_Profile : {
         width: 150,
         height: 150,
-        borderRadius: "100%"
+        borderRadius: 100,
 
     },
     section_card : {

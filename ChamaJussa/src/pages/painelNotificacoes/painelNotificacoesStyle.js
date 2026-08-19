@@ -15,7 +15,7 @@ export const PainelNotificacoesStyle = StyleSheet.create({
         textAlign: 'center'
     },
     cardNotificacao: {
-        width: '80%',
+        width: '100%',
         flexDirection: 'row',
         backgroundColor: 'white',
         borderRadius: 10,
@@ -24,16 +24,13 @@ export const PainelNotificacoesStyle = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         alignItems: 'flex-start',
-        marginBottom: 16
+        marginBottom: 15,
     },
     Icone: {
         width: 28,
         height: 28,
         marginRight: 10,
         marginTop: 30
-    },
-    conteudoTexto: {
-        flex: 1
     },
     titulo: {
         fontSize: 15,

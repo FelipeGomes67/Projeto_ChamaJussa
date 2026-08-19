@@ -127,6 +127,8 @@ export const putUsers = async (id, nome, email, senha, tipoUsuario, imagem) => {
     }
 };
 
+
+
 // REQUISIÇÕES OS
 
 export const getOS = async () => {
@@ -244,5 +246,7 @@ export const putOS = async (id, titulo, equipamento, local, descricao, imagem, s
         erro("Editar OS", error);
     }
 };
+
+
 
 export default api;

@@ -16,7 +16,7 @@ export const CriarOSStyle = StyleSheet.create({
     },
 
     cardProblema: {
-        width: '80%',
+        width: '90%',
         height: '78%',
         backgroundColor: 'white',
         borderRadius: 10,
@@ -37,7 +37,7 @@ export const CriarOSStyle = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderRadius: 3,
-        height: 30
+        height: 40,
     },
     inputDescricao: {
         paddingLeft: 3,

@@ -30,7 +30,6 @@ export const CadastroStyle = StyleSheet.create({
     borderRadius: 5,
   },
   header_section: {
-    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
@@ -62,7 +61,7 @@ export const CadastroStyle = StyleSheet.create({
     color: "#000000",
   },
   login_user__input: {
-    height: 45,
+    height: 50,
     width: 250,
     fontSize: 13,
     borderRadius: 5,
@@ -75,6 +74,24 @@ export const CadastroStyle = StyleSheet.create({
     paddingHorizontal: 10,
     color: "#000000",
     marginBottom: 20,
+  },
+  login_user__picker_container: {
+    height: 50,
+    width: 250,
+    borderRadius: 5,
+    borderColor: "#53535346", 
+    borderWidth: 1,
+    backgroundColor: "#F3F4F6",
+    marginBottom: 20,
+    justifyContent: "center",
+    overflow: "hidden", 
+  },
+
+  login_user__picker: {
+    height: 50,
+    width: "100%",
+    color: "#000000",
+    backgroundColor: "transparent",
   },
   login_user__button: {
     width: 250,
@@ -90,7 +107,7 @@ export const CadastroStyle = StyleSheet.create({
     color: "#FFF",
     fontWeight: 500,
   },
-  login_user__button_text_image : {
+  login_user__button_text_image: {
     textAlign: "center",
     color: "#0000005d",
   },
