@@ -1,22 +1,14 @@
 import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LoginStyle } from "./loginStyle";
 import { useState } from "react";
-
-<<<<<<< Updated upstream
+import { useNavigation } from "@react-navigation/native";
 
 export function Login() {
 
+    const navigation = useNavigation();
 
-    const [emailDigitado, SetemailDigitado] = useState("")
-
-    const [SenhaDigitada, SetSenhaDigitada] = useState("")
-=======
-export function Login({ navigation }) {
     const [emailDigitado, setEmailDigitado] = useState("");
     const [senhaDigitada, setSenhaDigitada] = useState("");
-
->>>>>>> Stashed changes
-
 
     return (
         <View style={LoginStyle.main_section}>
@@ -29,15 +21,25 @@ export function Login({ navigation }) {
             </View>
 
             <View style={LoginStyle.section_card}>
+
                 <View style={LoginStyle.teste}>
 
                     <View style={LoginStyle.header_section}>
-                        <Text style={LoginStyle.header_section__tittle}>Chama Jussa</Text>
-                        <Text style={LoginStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
+                        <Text style={LoginStyle.header_section__tittle}>
+                            Chama Jussa
+                        </Text>
+
+                        <Text style={LoginStyle.header_section__subtittle}>
+                            Gerenciamento de Ordens e Serviços
+                        </Text>
                     </View>
 
                     <View style={LoginStyle.login_user}>
-                        <Text style={LoginStyle.text_input}>E-mail</Text>
+
+                        <Text style={LoginStyle.text_input}>
+                            E-mail
+                        </Text>
+
                         <TextInput
                             style={LoginStyle.login_user__input}
                             placeholder="Digite seu Email"
@@ -46,7 +48,10 @@ export function Login({ navigation }) {
                             onChangeText={setEmailDigitado}
                         />
 
-                        <Text style={LoginStyle.text_input}>Senha</Text>
+                        <Text style={LoginStyle.text_input}>
+                            Senha
+                        </Text>
+
                         <TextInput
                             style={LoginStyle.login_user__input}
                             placeholder="Digite sua Senha"
@@ -58,46 +63,36 @@ export function Login({ navigation }) {
 
                         <TouchableOpacity
                             style={LoginStyle.login_user__button}
-                            onPress={() => navigation.navigate('CriarOS')}
+                            onPress={() => navigation.navigate("CriarOS")}
                         >
-                            <Text style={LoginStyle.login_user__button_text}>Acessar o sistema</Text>
+                            <Text style={LoginStyle.login_user__button_text}>
+                                Acessar o sistema
+                            </Text>
                         </TouchableOpacity>
+
                     </View>
 
                     <View style={LoginStyle.login_user__textCadastroDiv}>
-                        <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
 
-                        <div style={LoginStyle.login_user__textCadastroDiv}>
-
-                            <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
-
-                            <TouchableOpacity style={LoginStyle.login_user__button_Cadastro}>
-                                <Text style={LoginStyle.login_user__textCadastroButton}>Cadastra-se</Text>
-                            </TouchableOpacity>
-
-                        </div>
-
-
-
-<<<<<<< Updated upstream
-                    </View>
-=======
+                        <Text style={LoginStyle.login_user__textCadastro}>
+                            Não possui conta?
+                        </Text>
 
                         <TouchableOpacity
                             style={LoginStyle.login_user__button_Cadastro}
-                            onPress={() => navigation.navigate('Cadastro')}
+                            onPress={() => navigation.navigate("Cadastro")}
                         >
-                            <Text style={LoginStyle.login_user__textCadastroButton}>Cadastre-se</Text>
+                            <Text style={LoginStyle.login_user__textCadastroButton}>
+                                Cadastrar-se
+                            </Text>
                         </TouchableOpacity>
+
                     </View>
 
->>>>>>> Stashed changes
                 </View>
-            </View>
-        </View>
-    )
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+            </View>
+
+        </View>
+    );
 }

@@ -50,14 +50,14 @@ export const LoginStyle = StyleSheet.create({
   login_user: {
     width: "100%",
     padding: 5,
-    paddingLeft: "7.5%",
+
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
-    paddingLeft: "7%",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+
   },
   login_user__text: {
     paddingTop: 5,
@@ -99,6 +99,7 @@ export const LoginStyle = StyleSheet.create({
     fontSize: 12,
     fontWeight: "400",
     color: "#000",
+    textAlign: "center"
   },
   login_user__textCadastroButton: {
     fontSize: 12,
@@ -107,10 +108,9 @@ export const LoginStyle = StyleSheet.create({
     textAlign: "center",
   },
   login_user__textCadastroDiv: {
-    paddingTop: 5,
+    paddingTop: 6,
     textAlign: "center"
   },
-
 
 
 }
