@@ -2,7 +2,6 @@ import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LoginStyle } from "./loginStyle";
 import { useState } from "react";
 
-<<<<<<< HEAD
 
 export function Login() {
 
@@ -10,20 +9,15 @@ export function Login() {
     const [emailDigitado, SetemailDigitado] = useState("")
 
     const [SenhaDigitada, SetSenhaDigitada] = useState("")
-=======
-export function Login({ navigation }) {
-    const [emailDigitado, setEmailDigitado] = useState("");
-    const [senhaDigitada, setSenhaDigitada] = useState("");
->>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
 
 
     return (
         <View style={LoginStyle.main_section}>
-            
+
             <View style={LoginStyle.figure_section}>
-                <Image 
-                    style={LoginStyle.figure_section__img} 
-                    source={require("../../../assets/Jussa-Logo.png")} 
+                <Image
+                    style={LoginStyle.figure_section__img}
+                    source={require("../../../assets/Jussa-Logo.png")}
                 />
             </View>
 
@@ -55,7 +49,7 @@ export function Login({ navigation }) {
                             onChangeText={setSenhaDigitada}
                         />
 
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={LoginStyle.login_user__button}
                             onPress={() => navigation.navigate('CriarOS')}
                         >
@@ -66,37 +60,21 @@ export function Login({ navigation }) {
                     <View style={LoginStyle.login_user__textCadastroDiv}>
                         <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
 
-<<<<<<< HEAD
-                    <div style={LoginStyle.login_user__textCadastroDiv}>
+                        <div style={LoginStyle.login_user__textCadastroDiv}>
 
-                        <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
+                            <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
 
-                        <TouchableOpacity style={LoginStyle.login_user__button_Cadastro}>
-                            <Text style={LoginStyle.login_user__textCadastroButton}>Cadastra-se</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity style={LoginStyle.login_user__button_Cadastro}>
+                                <Text style={LoginStyle.login_user__textCadastroButton}>Cadastra-se</Text>
+                            </TouchableOpacity>
 
-                    </div>
-
+                        </div>
 
 
-                </div>
-=======
-                        <TouchableOpacity 
-                            style={LoginStyle.login_user__button_Cadastro} 
-                            onPress={() => navigation.navigate('Cadastro')}
-                        >
-                            <Text style={LoginStyle.login_user__textCadastroButton}>Cadastre-se</Text>
-                        </TouchableOpacity>
+
                     </View>
->>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
-
                 </View>
             </View>
-
         </View>
-<<<<<<< HEAD
     )
-=======
-    );
->>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
 }
