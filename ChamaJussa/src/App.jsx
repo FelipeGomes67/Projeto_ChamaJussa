@@ -14,6 +14,7 @@ import { PainelNotificacoes } from './pages/painelNotificacoes/painelNotificacoe
 
 import { CriarOS } from './pages/criarOS/criarOS';
 import { Cadastro } from './pages/cadastro/cadastro';
+import { MinhasOS } from './pages/minhasOS/minhasOS';
 
 const Stack = createNativeStackNavigator()
 
@@ -36,7 +37,7 @@ export default function App() {
         <NavigationContainer>
 
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="MinhasOS"
             screenOptions={{
               headerShown: false
             }}
@@ -45,6 +46,7 @@ export default function App() {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="CriarOS" component={CriarOS} />
+            <Stack.Screen name="MinhasOS" component={MinhasOS} />
 
           </Stack.Navigator>
         </NavigationContainer>
