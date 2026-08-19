@@ -6,11 +6,11 @@ export const LoginStyle = StyleSheet.create({
     height: 200,
     resizeMode: "contain",
   },
-  text_input : {
+  text_input: {
     fontWeight: 750,
     fontSize: 12,
     color: "#000",
-    
+
   },
   main_section: {
     flex: 1,
@@ -50,18 +50,15 @@ export const LoginStyle = StyleSheet.create({
   login_user: {
     width: "100%",
     padding: 5,
-<<<<<<< Updated upstream
     paddingLeft: "7.5%",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
-=======
     paddingLeft: "7%",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
-    
->>>>>>> Stashed changes
+
   },
   login_user__text: {
     paddingTop: 5,
@@ -92,31 +89,29 @@ export const LoginStyle = StyleSheet.create({
     justifyContent: "center",
     marginTop: 5,
   },
-  login_user__button_text : {
+  login_user__button_text: {
     color: "#FFF",
     fontWeight: 500,
-<<<<<<< Updated upstream
   },
-  login_user__button_Cadastro : {
+  login_user__button_Cadastro: {
     paddingVertical: 2,
   },
-  login_user__textCadastro : {
+  login_user__textCadastro: {
     fontSize: 12,
     fontWeight: "400",
     color: "#000",
   },
-  login_user__textCadastroButton : {
-    fontSize: 12  ,
+  login_user__textCadastroButton: {
+    fontSize: 12,
     color: "#2C7BE5",
     fontWeight: "600",
     textAlign: "center",
   },
-  login_user__textCadastroDiv : {
+  login_user__textCadastroDiv: {
     paddingTop: 5,
-   textAlign: "center"
+    textAlign: "center"
   },
 
-=======
-  }
->>>>>>> Stashed changes
-});
+
+}
+);

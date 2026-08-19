@@ -4,6 +4,7 @@ import { TextInput } from "react-native"
 import { useState } from "react"
 import { Footer } from "../../../Components/footer/Footer"
 
+
 export function CriarOS() {
 
     const [titulo, setTitulo] = useState("")
@@ -57,7 +58,8 @@ export function CriarOS() {
 
             </View>
 
-            <Footer/>
+            <Footer />
+
         </View>
     )
 }

@@ -1,42 +1,54 @@
-import { Image, View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Image, Text } from "react-native";
 import { FooterStyle } from "./FooterStyle";
 
 export function Footer() {
     return (
         <View style={FooterStyle.Container}>
 
+            {/* Minhas OS */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/MinhasOS.png")}
-                    style={[FooterStyle.Icone, "minhasOS" && FooterStyle.IconeAtivo]}
+                    source={require("../../assets/Minhas-OS.png")}
+                    style={FooterStyle.Icone}
                 />
-                <Text style={[FooterStyle.Label, "minhasOS" && FooterStyle.LabelAtivo]}>Minhas OS</Text>
+                <Text style={FooterStyle.Label}>
+                    Minhas OS
+                </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={FooterStyle.Item}>
-                    <Image
-                        source={require("../../assets/CriarOS.png")}
-                        style={FooterStyle.Icone}
-                    />
-                <Text>Criar OS</Text>
-            </TouchableOpacity>
-
+            {/* Criar OS */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("../../assets/Notificacoes.png")}
-                    style={[FooterStyle.Icone, "notificacoes" && FooterStyle.IconeAtivo]}
+                    source={require("../../assets/Criar OS.png")}
+                    style={FooterStyle.Icone}
                 />
-                <Text>Notificações</Text>
+                <Text style={FooterStyle.Label}>
+                    Criar OS
+                </Text>
             </TouchableOpacity>
 
+            {/* Notificações */}
             <TouchableOpacity style={FooterStyle.Item}>
                 <Image
-                    source={require("./assets/Perfil.png")}
-                    style={[FooterStyle.Icone, "perfil" && FooterStyle.IconeAtivo]}
+                    source={require("../../assets/Notificacao.png")}
+                    style={FooterStyle.Icone}
                 />
-                <Text>Perfil</Text>
+                <Text style={FooterStyle.Label}>
+                    Notificações
+                </Text>
+            </TouchableOpacity>
+
+            {/* Perfil */}
+            <TouchableOpacity style={FooterStyle.Item}>
+                <Image
+                    source={require("../../assets/Perfil.png")}
+                    style={FooterStyle.Icone}
+                />
+                <Text style={FooterStyle.Label}>
+                    Perfil
+                </Text>
             </TouchableOpacity>
 
         </View>
-    )
+    );
 }
