@@ -50,10 +50,18 @@ export const LoginStyle = StyleSheet.create({
   login_user: {
     width: "100%",
     padding: 5,
+<<<<<<< Updated upstream
     paddingLeft: "7.5%",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+=======
+    paddingLeft: "7%",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    
+>>>>>>> Stashed changes
   },
   login_user__text: {
     paddingTop: 5,
@@ -87,6 +95,7 @@ export const LoginStyle = StyleSheet.create({
   login_user__button_text : {
     color: "#FFF",
     fontWeight: 500,
+<<<<<<< Updated upstream
   },
   login_user__button_Cadastro : {
     paddingVertical: 2,
@@ -107,4 +116,7 @@ export const LoginStyle = StyleSheet.create({
    textAlign: "center"
   },
 
+=======
+  }
+>>>>>>> Stashed changes
 });

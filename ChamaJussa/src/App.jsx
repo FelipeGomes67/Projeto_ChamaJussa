@@ -16,7 +16,7 @@ export default function App() {
 
      <View style={styles.container}>
 
-      <CriarOS/>
+      <Cadastro/>
       
       <StatusBar style="auto" />
 
