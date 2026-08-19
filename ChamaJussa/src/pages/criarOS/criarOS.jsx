@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native"
 import { CriarOSStyle } from "./CriarOSStyle"
 import { TextInput } from "react-native"
 import { useState } from "react"
-import { Footer } from "../../../Components/footer/Footer"
+import { Footer } from "../../Components/footer/Footer"
 
 export function CriarOS() {
 

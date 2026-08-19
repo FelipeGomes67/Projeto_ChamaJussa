@@ -2,87 +2,69 @@ import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { CadastroStyle } from "./cadastroStyle";
 import { useState } from "react";
 
-
-export function Cadastro() {
-
-    const [emailDigitado, SetemailDigitado] = useState("")
-
-    const [usuariodigitado, Setusuariodigitado] = useState("")
-
-    const [SenhaDigitada, SetSenhaDigitada] = useState("")
+export function Cadastro({ navigation }) {
+    const [emailDigitado, setEmailDigitado] = useState("");
+    const [usuarioDigitado, setUsuarioDigitado] = useState("");
+    const [senhaDigitada, setSenhaDigitada] = useState("");
 
     return (
         <View style={CadastroStyle.main_section}>
-            <figure style={CadastroStyle.figure_section}>
-                <Image style={CadastroStyle.figure_section__img} source={require("../../../assets/Jussa-Logo.png")} />
-            </figure>
+            <View style={CadastroStyle.figure_section}>
+                <Image 
+                    style={CadastroStyle.figure_section__img} 
+                    source={require("../../../assets/Jussa-Logo.png")} 
+                />
+            </View>
 
-            <section style={CadastroStyle.section_card}>
+            <View style={CadastroStyle.section_card}>
+                <View style={CadastroStyle.teste}>
 
-                <div style={CadastroStyle.teste}>
-
-                    <header style={CadastroStyle.header_section}>
-
+                    <View style={CadastroStyle.header_section}>
                         <Text style={CadastroStyle.header_section__tittle}>Chama Jussa</Text>
-                        <br />
                         <Text style={CadastroStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
+                    </View>
 
-                    </header>
-
-                    <form action="" style={CadastroStyle.login_user}>
+                    <View style={CadastroStyle.login_user}>
 
                         <Text style={CadastroStyle.text_input}>E-mail</Text>
-
-                        <br />
-
                         <TextInput
                             style={CadastroStyle.login_user__input}
                             placeholder="Digite seu Email"
                             placeholderTextColor="#0000005d"
                             value={emailDigitado}
-                            onChangeText={SetemailDigitado}
+                            onChangeText={setEmailDigitado}
                         />
 
-                        <br />
-
                         <Text style={CadastroStyle.text_input}>Nome de Usuário</Text>
-
-                        <br />
-
                         <TextInput
                             style={CadastroStyle.login_user__input}
                             placeholder="Digite seu User"
                             placeholderTextColor="#0000005d"
-                            value={usuariodigitado}
-                            onChangeText={Setusuariodigitado}
+                            value={usuarioDigitado}
+                            onChangeText={setUsuarioDigitado}
                         />
 
-                        <br />
-
-
                         <Text style={CadastroStyle.text_input}>Senha</Text>
-
-                        <br />
                         <TextInput
                             style={CadastroStyle.login_user__input}
                             placeholder="Digite sua Senha"
                             placeholderTextColor="#0000005d"
-                            value={SenhaDigitada}
-                            onChangeText={SetSenhaDigitada}
+                            secureTextEntry={true}
+                            value={senhaDigitada}
+                            onChangeText={setSenhaDigitada}
                         />
 
-                        <TouchableOpacity style={CadastroStyle.login_user__button}>
-
+                        <TouchableOpacity 
+                            style={CadastroStyle.login_user__button} 
+                            onPress={() => navigation.navigate('CriarOS')}
+                        >
                             <Text style={CadastroStyle.login_user__button_text}>Acessar o sistema</Text>
-
                         </TouchableOpacity>
 
-                    </form>
+                    </View>
 
-                </div>
-
-            </section>
-
+                </View>
+            </View>
         </View>
-    )
+    );
 }
