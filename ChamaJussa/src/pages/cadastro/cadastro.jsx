@@ -3,86 +3,86 @@ import { CadastroStyle } from "./cadastroStyle";
 import { useState } from "react";
 
 
-export function Cadastro () {
+export function Cadastro() {
 
-   const [emailDigitado, SetemailDigitado] = useState("")
+    const [emailDigitado, SetemailDigitado] = useState("")
 
-   const [usuariodigitado, Setusuariodigitado] = useState("")
+    const [usuariodigitado, Setusuariodigitado] = useState("")
 
-   const [SenhaDigitada, SetSenhaDigitada] = useState("")
+    const [SenhaDigitada, SetSenhaDigitada] = useState("")
 
-    return(
-   <View style={CadastroStyle.main_section}>
-    <figure style={CadastroStyle.figure_section}>
-    <Image style={CadastroStyle.figure_section__img} source={require("../../../assets/Jussa-Logo.png")} />
-    </figure>
-   
-    <section style={CadastroStyle.section_card}>
+    return (
+        <View style={CadastroStyle.main_section}>
+            <figure style={CadastroStyle.figure_section}>
+                <Image style={CadastroStyle.figure_section__img} source={require("../../../assets/Jussa-Logo.png")} />
+            </figure>
 
-        <div style={CadastroStyle.teste}>
+            <section style={CadastroStyle.section_card}>
 
-        <header style={CadastroStyle.header_section}>
+                <div style={CadastroStyle.teste}>
 
-         <Text style={CadastroStyle.header_section__tittle}>Chama Jussa</Text>
-         <br />
-         <Text style={CadastroStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
+                    <header style={CadastroStyle.header_section}>
 
-        </header>
+                        <Text style={CadastroStyle.header_section__tittle}>Chama Jussa</Text>
+                        <br />
+                        <Text style={CadastroStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
 
-        <form action="" style={CadastroStyle.login_user}>
+                    </header>
 
-        <Text style={CadastroStyle.text_input}>E-mail</Text>
+                    <form action="" style={CadastroStyle.login_user}>
 
-        <br />
-        
-        <TextInput
-        style={CadastroStyle.login_user__input}
-        placeholder="Digite seu Email"
-        placeholderTextColor="#0000005d"
-        value={emailDigitado}
-        onChangeText={SetemailDigitado}
-        />
+                        <Text style={CadastroStyle.text_input}>E-mail</Text>
 
-        <br />
+                        <br />
 
-        <Text style={CadastroStyle.text_input}>Nome de Usuário</Text>
+                        <TextInput
+                            style={CadastroStyle.login_user__input}
+                            placeholder="Digite seu Email"
+                            placeholderTextColor="#0000005d"
+                            value={emailDigitado}
+                            onChangeText={SetemailDigitado}
+                        />
 
-        <br />
-        
-        <TextInput
-        style={CadastroStyle.login_user__input}
-        placeholder="Digite seu User"
-        placeholderTextColor="#0000005d"
-        value={usuariodigitado}
-        onChangeText={Setusuariodigitado}
-        />
+                        <br />
 
-        <br />
+                        <Text style={CadastroStyle.text_input}>Nome de Usuário</Text>
+
+                        <br />
+
+                        <TextInput
+                            style={CadastroStyle.login_user__input}
+                            placeholder="Digite seu User"
+                            placeholderTextColor="#0000005d"
+                            value={usuariodigitado}
+                            onChangeText={Setusuariodigitado}
+                        />
+
+                        <br />
 
 
-        <Text style={CadastroStyle.text_input}>Senha</Text>
+                        <Text style={CadastroStyle.text_input}>Senha</Text>
 
-        <br />
-        <TextInput
-        style={CadastroStyle.login_user__input}
-        placeholder="Digite sua Senha"
-        placeholderTextColor="#0000005d"
-        value={SenhaDigitada}
-        onChangeText={SetSenhaDigitada}
-        />
+                        <br />
+                        <TextInput
+                            style={CadastroStyle.login_user__input}
+                            placeholder="Digite sua Senha"
+                            placeholderTextColor="#0000005d"
+                            value={SenhaDigitada}
+                            onChangeText={SetSenhaDigitada}
+                        />
 
-        <TouchableOpacity style={CadastroStyle.login_user__button}>
+                        <TouchableOpacity style={CadastroStyle.login_user__button}>
 
-        <Text style={CadastroStyle.login_user__button_text}>Acessar o sistema</Text>
+                            <Text style={CadastroStyle.login_user__button_text}>Acessar o sistema</Text>
 
-        </TouchableOpacity>
+                        </TouchableOpacity>
 
-        </form>
+                    </form>
 
-        </div>
+                </div>
 
-    </section>
+            </section>
 
-   </View>
+        </View>
     )
 }

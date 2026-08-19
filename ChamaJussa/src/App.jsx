@@ -4,7 +4,8 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { styles } from './Style';
 import { Login } from './pages/login/login';
-import { CriarOS} from './pages/criarOS/criarOS'
+import { CriarOS } from './pages/criarOS/criarOS';
+import { Cadastro } from './pages/cadastro/cadastro';
 
 
 
@@ -12,17 +13,17 @@ export default function App() {
   return (
     <SafeAreaProvider>
 
-     <SafeAreaView style={styles.safeContainer}>
+      <SafeAreaView style={styles.safeContainer}>
 
-     <View style={styles.container}>
+        <View style={styles.container}>
 
-      <Cadastro/>
-      
-      <StatusBar style="auto" />
+          <Cadastro />
 
-    </View>
+          <StatusBar style="auto" />
 
-     </SafeAreaView>
+        </View>
+
+      </SafeAreaView>
 
     </SafeAreaProvider>
 
