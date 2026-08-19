@@ -287,19 +287,53 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
+                "required": [
+                  "Email",
+                  "Nome"
+                ],
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "maxLength": 256,
+                    "minLength": 0,
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "Senha": {
+                    "type": "string"
+                  },
+                  "TipoUsuario": {
+                    "type": "string"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Senha": {
+                  "style": "form"
+                },
+                "TipoUsuario": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -361,19 +395,53 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UsuarioDto"
+                "required": [
+                  "Email",
+                  "Nome"
+                ],
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "maxLength": 256,
+                    "minLength": 0,
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "Senha": {
+                    "type": "string"
+                  },
+                  "TipoUsuario": {
+                    "type": "string"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Senha": {
+                  "style": "form"
+                },
+                "TipoUsuario": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -424,35 +492,6 @@
           "senha": {
             "minLength": 1,
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UsuarioDto": {
-        "required": [
-          "email",
-          "nome"
-        ],
-        "type": "object",
-        "properties": {
-          "nome": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "email": {
-            "maxLength": 256,
-            "minLength": 0,
-            "type": "string",
-            "format": "email"
-          },
-          "senha": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoUsuario": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

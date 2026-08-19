@@ -2,6 +2,7 @@ import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
 import { LoginStyle } from "./loginStyle";
 import { useState } from "react";
 
+<<<<<<< HEAD
 
 export function Login() {
 
@@ -9,60 +10,63 @@ export function Login() {
     const [emailDigitado, SetemailDigitado] = useState("")
 
     const [SenhaDigitada, SetSenhaDigitada] = useState("")
+=======
+export function Login({ navigation }) {
+    const [emailDigitado, setEmailDigitado] = useState("");
+    const [senhaDigitada, setSenhaDigitada] = useState("");
+>>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
 
 
     return (
         <View style={LoginStyle.main_section}>
-            <figure style={LoginStyle.figure_section}>
-                <Image style={LoginStyle.figure_section__img} source={require("../../../assets/Jussa-Logo.png")} />
-            </figure>
+            
+            <View style={LoginStyle.figure_section}>
+                <Image 
+                    style={LoginStyle.figure_section__img} 
+                    source={require("../../../assets/Jussa-Logo.png")} 
+                />
+            </View>
 
-            <section style={LoginStyle.section_card}>
+            <View style={LoginStyle.section_card}>
+                <View style={LoginStyle.teste}>
 
-                <div style={LoginStyle.teste}>
-
-                    <header style={LoginStyle.header_section}>
-
+                    <View style={LoginStyle.header_section}>
                         <Text style={LoginStyle.header_section__tittle}>Chama Jussa</Text>
-                        <br />
                         <Text style={LoginStyle.header_section__subtittle}>Gerenciamento de Ordens e Serviços</Text>
+                    </View>
 
-                    </header>
-
-                    <form action="" style={LoginStyle.login_user}>
-
+                    <View style={LoginStyle.login_user}>
                         <Text style={LoginStyle.text_input}>E-mail</Text>
-
-                        <br />
-
                         <TextInput
                             style={LoginStyle.login_user__input}
                             placeholder="Digite seu Email"
                             placeholderTextColor="#0000005d"
                             value={emailDigitado}
-                            onChangeText={SetemailDigitado}
+                            onChangeText={setEmailDigitado}
                         />
 
-                        <br />
-
                         <Text style={LoginStyle.text_input}>Senha</Text>
-                        <br />
                         <TextInput
                             style={LoginStyle.login_user__input}
                             placeholder="Digite sua Senha"
                             placeholderTextColor="#0000005d"
-                            value={SenhaDigitada}
-                            onChangeText={SetSenhaDigitada}
+                            secureTextEntry={true}
+                            value={senhaDigitada}
+                            onChangeText={setSenhaDigitada}
                         />
 
-                        <TouchableOpacity style={LoginStyle.login_user__button}>
-
+                        <TouchableOpacity 
+                            style={LoginStyle.login_user__button}
+                            onPress={() => navigation.navigate('CriarOS')}
+                        >
                             <Text style={LoginStyle.login_user__button_text}>Acessar o sistema</Text>
-
                         </TouchableOpacity>
+                    </View>
 
-                    </form>
+                    <View style={LoginStyle.login_user__textCadastroDiv}>
+                        <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
 
+<<<<<<< HEAD
                     <div style={LoginStyle.login_user__textCadastroDiv}>
 
                         <Text style={LoginStyle.login_user__textCadastro}>Não possui conta?</Text>
@@ -76,9 +80,23 @@ export function Login() {
 
 
                 </div>
+=======
+                        <TouchableOpacity 
+                            style={LoginStyle.login_user__button_Cadastro} 
+                            onPress={() => navigation.navigate('Cadastro')}
+                        >
+                            <Text style={LoginStyle.login_user__textCadastroButton}>Cadastre-se</Text>
+                        </TouchableOpacity>
+                    </View>
+>>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
 
-            </section>
+                </View>
+            </View>
 
         </View>
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
 }

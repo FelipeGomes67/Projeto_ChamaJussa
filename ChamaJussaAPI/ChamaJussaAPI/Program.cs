@@ -88,7 +88,9 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
+
 app.UseCors("CorsPolicy");
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

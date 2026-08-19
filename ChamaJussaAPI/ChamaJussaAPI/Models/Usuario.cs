@@ -14,4 +14,6 @@ public partial class Usuario
     public string Email { get; set; } = null!;
 
     public string TipoUsuario { get; set; } = null!;
+
+    public string Imagem { get; set; } = null!;
 }

@@ -19,7 +19,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Cadastrar([FromBody] UsuarioDto usuarioDto)
+    public async Task<IActionResult> Cadastrar([FromForm] UsuarioDto usuarioDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -31,12 +31,33 @@ public class UsuarioController : ControllerBase
         if (string.IsNullOrWhiteSpace(usuarioDto.Senha))
             return BadRequest(new { mensagem = "A senha é obrigatória para o cadastro." });
 
+        string? caminhoImagem = null;
+
+        if (usuarioDto.Imagem != null && usuarioDto.Imagem.Length > 0)
+        {
+            var nomeArquivo = $"{Guid.NewGuid()}{Path.GetExtension(usuarioDto.Imagem.FileName)}";
+            var pastaUploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+
+            if (!Directory.Exists(pastaUploads))
+                Directory.CreateDirectory(pastaUploads);
+
+            var caminhoCompleto = Path.Combine(pastaUploads, nomeArquivo);
+
+            using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+            {
+                await usuarioDto.Imagem.CopyToAsync(stream);
+            }
+
+            caminhoImagem = $"/uploads/{nomeArquivo}";
+        }
+
         var usuario = new Usuario
         {
             Nome = usuarioDto.Nome,
             Email = usuarioDto.Email,
             Senha = Criptografia.GerarHash(usuarioDto.Senha),
-            TipoUsuario = string.IsNullOrWhiteSpace(usuarioDto.TipoUsuario) ? "Comum" : usuarioDto.TipoUsuario
+            TipoUsuario = string.IsNullOrWhiteSpace(usuarioDto.TipoUsuario) ? "Comum" : usuarioDto.TipoUsuario,
+            Imagem = caminhoImagem!
         };
 
         await _usuarioRepository.CadastrarAsync(usuario);
@@ -46,7 +67,8 @@ public class UsuarioController : ControllerBase
             usuario.IdUsuario,
             usuario.Nome,
             usuario.Email,
-            usuario.TipoUsuario
+            usuario.TipoUsuario,
+            usuario.Imagem
         };
 
         return CreatedAtAction("ObterPorId", new { id = usuario.IdUsuario }, respostaDto);
@@ -62,7 +84,8 @@ public class UsuarioController : ControllerBase
             u.IdUsuario,
             u.Nome,
             u.Email,
-            u.TipoUsuario
+            u.TipoUsuario,
+            u.Imagem
         }).ToList();
 
         return Ok(listaDto);
@@ -81,14 +104,15 @@ public class UsuarioController : ControllerBase
             usuario.IdUsuario,
             usuario.Nome,
             usuario.Email,
-            usuario.TipoUsuario
+            usuario.TipoUsuario,
+            usuario.Imagem
         };
 
         return Ok(dto);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Atualizar(Guid id, [FromBody] UsuarioDto usuarioDto)
+    public async Task<IActionResult> Atualizar(Guid id, [FromForm] UsuarioDto usuarioDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -96,6 +120,24 @@ public class UsuarioController : ControllerBase
         var usuario = await _usuarioRepository.ObterPorIdAsync(id);
         if (usuario == null)
             return NotFound(new { mensagem = "Usuário não encontrado." });
+
+        if (usuarioDto.Imagem != null && usuarioDto.Imagem.Length > 0)
+        {
+            var nomeArquivo = $"{Guid.NewGuid()}{Path.GetExtension(usuarioDto.Imagem.FileName)}";
+            var pastaUploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+
+            if (!Directory.Exists(pastaUploads))
+                Directory.CreateDirectory(pastaUploads);
+
+            var caminhoCompleto = Path.Combine(pastaUploads, nomeArquivo);
+
+            using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+            {
+                await usuarioDto.Imagem.CopyToAsync(stream);
+            }
+
+            usuario.Imagem = $"/uploads/{nomeArquivo}";
+        }
 
         usuario.Nome = usuarioDto.Nome;
         usuario.Email = usuarioDto.Email;

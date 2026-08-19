@@ -54,11 +54,14 @@ export const LoginStyle = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+<<<<<<< HEAD
     paddingLeft: "7%",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
 
+=======
+>>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
   },
   login_user__text: {
     paddingTop: 5,
@@ -112,6 +115,10 @@ export const LoginStyle = StyleSheet.create({
     textAlign: "center"
   },
 
+<<<<<<< HEAD
 
 }
 );
+=======
+});
+>>>>>>> fee4fac314280c5b0be72999dbdc3c9bda212420
