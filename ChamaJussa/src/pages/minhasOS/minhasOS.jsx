@@ -1,9 +1,10 @@
 import { Text, View, TouchableOpacity, ScrollView, Modal, Image, TextInput } from "react-native";
 import { Footer } from "../../Components/footer/Footer";
 import { MinhasOSStye } from "./minhasOSStyles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Feather } from '@expo/vector-icons';
 import jussaLogo from "../../../assets/Jussa-Logo.png";
+import { getOS, localAPIImagePath } from "../../services/Services";
 
 export function MinhasOS({ navigation }) {
 
@@ -13,19 +14,58 @@ export function MinhasOS({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
-    const [titulo, setTitulo] = useState("Vazamento hidráulico");
-    const [equipamento, setEquipamento] = useState("Tubulação/Sifão da Pia");
-    const [local, setLocal] = useState("Banheiro Masculino - Bloco B - 2º Andar");
-    const [descricao, setDescricao] = useState("Há um vazamento constante de água por baixo da pia do banheiro masculino do segundo andar do Bloco B. Está alagando o chão e causando risco de queda.");
+    const [osSelecionada, setOsSelecionada] = useState(null);
+
+    const [titulo, setTitulo] = useState("");
+    const [equipamento, setEquipamento] = useState("");
+    const [local, setLocal] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [status, setStatus] = useState("");
+    const [listaOS, setListaOS] = useState([]);
+
+    useEffect(() => {
+        const buscarOrdens = async () => {
+            try {
+                const dados = await getOS();
+                if (dados) {
+                    setListaOS(dados);
+                }
+            } catch (err) {
+                console.log("Erro ao carregar OS no componente:", err);
+            }
+        };
+
+        buscarOrdens();
+    }, []);
+
+    const abrirDetalhes = (os) => {
+        setOsSelecionada(os);
+        setTitulo(os.titulo || os.Titulo || "");
+        setEquipamento(os.equipamento || os.Equipamento || "");
+        setLocal(os.local || os.Local || "");
+        setDescricao(os.descricao || os.Descricao || "");
+        setStatus(os.status || os.Status || "");
+        setModalVisible(true);
+    };
 
     const fecharModal = () => {
         setModalVisible(false);
         setIsEditing(false);
+        setOsSelecionada(null);
     };
 
     const salvarEdicao = () => {
         setIsEditing(false);
     };
+
+    // Lógica de filtragem dos cards
+    const ordensFiltradas = listaOS.filter((os) => {
+        const statusOS = (os.status || os.Status || "").toLowerCase();
+        if (filtroAtivo === "Abertas") return statusOS === "aberto";
+        if (filtroAtivo === "Em Andamento") return statusOS === "em andamento";
+        if (filtroAtivo === "Concluídas") return statusOS === "concluído" || statusOS === "concluido";
+        return true; 
+    });
 
     return (
         <>
@@ -40,7 +80,7 @@ export function MinhasOS({ navigation }) {
                         </Text>
                     </View>
 
-                    <TouchableOpacity style={MinhasOSStye.header_section_button}>
+                    <TouchableOpacity style={MinhasOSStye.header_section_button} onPress={() => navigation.navigate("CriarOS")}>
                         <Text style={MinhasOSStye.header_section_button_text}>
                             Nova OS
                         </Text>
@@ -78,23 +118,38 @@ export function MinhasOS({ navigation }) {
                 </View>
 
                 <ScrollView>
-                    <TouchableOpacity style={MinhasOSStye.card} onPress={() => setModalVisible(true)}>
-                        <View style={MinhasOSStye.card_header}>
-                            <Text style={MinhasOSStye.card_code}>OS - 001</Text>
+                    {ordensFiltradas.map((OS) => {
+                        const id = OS.idOs || OS.IdOs || OS.id;
+                        const tituloCard = OS.titulo || OS.Titulo;
+                        const statusCard = OS.status || OS.Status;
+                        const descricaoCard = OS.descricao || OS.Descricao;
 
-                            <View style={MinhasOSStye.status_badge}>
-                                <Text style={MinhasOSStye.status_text}>Aberta</Text>
-                            </View>
-                        </View>
+                        return (
+                            <TouchableOpacity 
+                                style={MinhasOSStye.card} 
+                                onPress={() => abrirDetalhes(OS)} 
+                                key={id}
+                            >
+                                <View style={MinhasOSStye.card_header}>
+                                    <Text style={MinhasOSStye.card_code}>
+                                        OS - #{id ? id.toString().substring(0, 5) : "---"}
+                                    </Text>
 
-                        <Text style={MinhasOSStye.card_title}>
-                            Vazamento hidráulico no Bloco B
-                        </Text>
+                                    <View style={MinhasOSStye.status_badge}>
+                                        <Text style={MinhasOSStye.status_text}>{statusCard}</Text>
+                                    </View>
+                                </View>
 
-                        <Text style={MinhasOSStye.card_description} numberOfLines={3}>
-                            Há um vazamento constante de água por baixo da pia do banheiro masculino do segundo andar do Bloco B...
-                        </Text>
-                    </TouchableOpacity>
+                                <Text style={MinhasOSStye.card_title}>
+                                    {tituloCard}
+                                </Text>
+
+                                <Text style={MinhasOSStye.card_description} numberOfLines={3}>
+                                    {descricaoCard}
+                                </Text>
+                            </TouchableOpacity>
+                        );
+                    })}
                 </ScrollView>
             </View>
 
@@ -111,7 +166,7 @@ export function MinhasOS({ navigation }) {
                         <View style={MinhasOSStye.modal_header}>
                             <View style={{ flex: 1 }} />
                             <Text style={MinhasOSStye.modal_main_title}>
-                                {isEditing ? "Editar OS-1001" : "Detalhes da OS-1001"}
+                                {isEditing ? "Editar OS" : "Detalhes da OS"}
                             </Text>
                             <View style={MinhasOSStye.modal_close_wrapper}>
                                 <TouchableOpacity
@@ -129,10 +184,9 @@ export function MinhasOS({ navigation }) {
                         >
                             <View style={MinhasOSStye.modal_card}>
                                 {!isEditing ? (
-                                    /* --- MODO VISUALIZAÇÃO --- */
                                     <>
                                         <Text style={MinhasOSStye.modal_os_title}>{titulo}</Text>
-                                        <Text style={MinhasOSStye.modal_os_date}>Criada em 17/06/2026, 11:29:58</Text>
+                                        <Text style={MinhasOSStye.modal_os_date}>Status: {status}</Text>
 
                                         <View style={MinhasOSStye.info_group}>
                                             <View style={MinhasOSStye.info_row}>
@@ -150,14 +204,6 @@ export function MinhasOS({ navigation }) {
                                                     <Text style={MinhasOSStye.info_value}>{local}</Text>
                                                 </View>
                                             </View>
-
-                                            <View style={MinhasOSStye.info_row}>
-                                                <Feather name="user" size={18} color="#006FFF" style={MinhasOSStye.info_icon} />
-                                                <View>
-                                                    <Text style={MinhasOSStye.info_label}>Solicitante</Text>
-                                                    <Text style={MinhasOSStye.info_value}>Késsia Milena</Text>
-                                                </View>
-                                            </View>
                                         </View>
 
                                         <View style={MinhasOSStye.divider} />
@@ -168,13 +214,16 @@ export function MinhasOS({ navigation }) {
                                         <Text style={MinhasOSStye.section_title}>Foto do Problema</Text>
 
                                         <Image
-                                            source={jussaLogo}
+                                            source={
+                                                osSelecionada?.imagem || osSelecionada?.Imagem
+                                                    ? { uri: `${localAPIImagePath}${osSelecionada.imagem || osSelecionada.Imagem}` }
+                                                    : jussaLogo
+                                            }
                                             style={MinhasOSStye.problem_image}
                                             resizeMode="contain"
                                         />
                                     </>
                                 ) : (
-                                    /* --- MODO EDIÇÃO --- */
                                     <>
                                         <Text style={MinhasOSStye.input_label}>Título da OS</Text>
                                         <TextInput
@@ -209,7 +258,6 @@ export function MinhasOS({ navigation }) {
                                 )}
                             </View>
 
-                            {/* Botões de Ação */}
                             {!isEditing ? (
                                 <TouchableOpacity
                                     style={MinhasOSStye.edit_button}

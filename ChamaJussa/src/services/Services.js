@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const apiPort = "7096";
-const localapi = `https://localhost:${apiPort}/api`;
-export const localAPIImagePath = `https://localhost:${apiPort}`;
+const apiPort = "5003";
+const localapi = `http://192.168.137.1:${apiPort}/api`;
+export const localAPIImagePath = `http://192.168.137.1:${apiPort}/api`;
 
-const api = axios.create({
+const api = axios.create({  
     baseURL: localapi
 });
 

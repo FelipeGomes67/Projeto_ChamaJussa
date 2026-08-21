@@ -2,17 +2,16 @@ import { Text, View, TextInput, TouchableOpacity, Image, Alert } from "react-nat
 import { LoginStyle } from "./loginStyle";
 import { useState, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { loginUser } from "../../services/Services";
 import { UsuarioContext } from "../../context/ChamaJussaContext";
 
 export function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const { setUsuario } = useContext(UsuarioContext);
+    const { setUsuario, login } = useContext(UsuarioContext);
 
     const handleLogin = async () => {
         try {
-            const resposta = await loginUser(email, senha);
+            const resposta = await login(email, senha);
 
             if (resposta) {
                 setUsuario(resposta);
@@ -26,7 +25,8 @@ export function Login({ navigation }) {
         } catch (error) {
             Alert.alert(
                 "Erro no Login", 
-                error?.response?.data || "Não foi possível realizar o login. Verifique suas credenciais."
+                error?.response?.data || "Não foi possível realizar o login. Verifique suas credenciais.",
+                console.log(error)
             );
         }
     };
