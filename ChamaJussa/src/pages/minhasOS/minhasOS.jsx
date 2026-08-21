@@ -1,18 +1,19 @@
-import { Text, View, TouchableOpacity, ScrollView, Modal, Image, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, Modal, Image, TextInput, Alert } from "react-native";
 import { Footer } from "../../Components/footer/Footer";
 import { MinhasOSStye } from "./minhasOSStyles";
 import { useEffect, useState } from "react";
 import { Feather } from '@expo/vector-icons';
-import jussaLogo from "../../../assets/Jussa-Logo.png";
-import { getOS, localAPIImagePath } from "../../services/Services";
+import { getOS, putOS, localAPIImagePath } from "../../services/Services";
 
 export function MinhasOS({ navigation }) {
 
     const [filtroAtivo, setFiltroAtivo] = useState("Todos");
     const opcoesFiltro = ["Todos", "Abertas", "Em Andamento", "Concluídas"];
+    const opcoesStatus = ["Aberto", "Em Andamento", "Concluído"];
 
     const [modalVisible, setModalVisible] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [loadingSave, setLoadingSave] = useState(false);
 
     const [osSelecionada, setOsSelecionada] = useState(null);
 
@@ -23,19 +24,19 @@ export function MinhasOS({ navigation }) {
     const [status, setStatus] = useState("");
     const [listaOS, setListaOS] = useState([]);
 
-    useEffect(() => {
-        const buscarOrdens = async () => {
-            try {
-                const dados = await getOS();
-                if (dados) {
-                    setListaOS(dados);
-                }
-            } catch (err) {
-                console.log("Erro ao carregar OS no componente:", err);
+    const carregarOrdens = async () => {
+        try {
+            const dados = await getOS();
+            if (dados) {
+                setListaOS(dados);
             }
-        };
+        } catch (err) {
+            console.log("Erro ao carregar OS no componente:", err);
+        }
+    };
 
-        buscarOrdens();
+    useEffect(() => {
+        carregarOrdens();
     }, []);
 
     const abrirDetalhes = (os) => {
@@ -44,7 +45,7 @@ export function MinhasOS({ navigation }) {
         setEquipamento(os.equipamento || os.Equipamento || "");
         setLocal(os.local || os.Local || "");
         setDescricao(os.descricao || os.Descricao || "");
-        setStatus(os.status || os.Status || "");
+        setStatus(os.status || os.Status || "Aberto");
         setModalVisible(true);
     };
 
@@ -54,11 +55,34 @@ export function MinhasOS({ navigation }) {
         setOsSelecionada(null);
     };
 
-    const salvarEdicao = () => {
-        setIsEditing(false);
+    const salvarEdicao = async () => {
+        const id = osSelecionada?.idOs || osSelecionada?.IdOs || osSelecionada?.id;
+        
+        if (!id) {
+            Alert.alert("Erro", "Não foi possível identificar o ID da OS");
+            return;
+        }
+
+        setLoadingSave(true);
+
+        const ok = await putOS(
+            id,
+            titulo,
+            equipamento,
+            local,
+            descricao,
+            null, 
+            status
+        );
+
+        setLoadingSave(false);
+
+        if (ok) {
+            await carregarOrdens();
+            fecharModal();
+        }
     };
 
-    // Lógica de filtragem dos cards
     const ordensFiltradas = listaOS.filter((os) => {
         const statusOS = (os.status || os.Status || "").toLowerCase();
         if (filtroAtivo === "Abertas") return statusOS === "aberto";
@@ -66,6 +90,20 @@ export function MinhasOS({ navigation }) {
         if (filtroAtivo === "Concluídas") return statusOS === "concluído" || statusOS === "concluido";
         return true; 
     });
+
+    const getImagemUrl = () => {
+        const nomeImagem = osSelecionada?.imagem || osSelecionada?.Imagem;
+        if (!nomeImagem) return null;
+
+        if (nomeImagem.startsWith('http://') || nomeImagem.startsWith('https://')) {
+            return { uri: nomeImagem };
+        }
+
+        const baseUrl = localAPIImagePath.replace('/api', '');
+        const path = nomeImagem.startsWith('/') ? nomeImagem : `/${nomeImagem}`;
+
+        return { uri: `${baseUrl}${path}` };
+    };
 
     return (
         <>
@@ -214,17 +252,39 @@ export function MinhasOS({ navigation }) {
                                         <Text style={MinhasOSStye.section_title}>Foto do Problema</Text>
 
                                         <Image
-                                            source={
-                                                osSelecionada?.imagem || osSelecionada?.Imagem
-                                                    ? { uri: `${localAPIImagePath}${osSelecionada.imagem || osSelecionada.Imagem}` }
-                                                    : jussaLogo
-                                            }
+                                            source={getImagemUrl()}
                                             style={MinhasOSStye.problem_image}
                                             resizeMode="contain"
+                                            onError={(e) => console.log("Erro ao carregar a imagem na URL:", getImagemUrl()?.uri, e.nativeEvent.error)}
                                         />
                                     </>
                                 ) : (
                                     <>
+                                        <Text style={MinhasOSStye.input_label}>Status da OS</Text>
+                                        <View style={{ flexDirection: 'row', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+                                            {opcoesStatus.map((item) => {
+                                                const selected = status === item;
+                                                return (
+                                                    <TouchableOpacity
+                                                        key={item}
+                                                        onPress={() => setStatus(item)}
+                                                        style={{
+                                                            paddingHorizontal: 12,
+                                                            paddingVertical: 6,
+                                                            borderRadius: 16,
+                                                            borderWidth: 1,
+                                                            borderColor: selected ? '#006FFF' : '#CCC',
+                                                            backgroundColor: selected ? '#006FFF' : '#FFF'
+                                                        }}
+                                                    >
+                                                        <Text style={{ color: selected ? '#FFF' : '#333', fontSize: 12, fontWeight: 'bold' }}>
+                                                            {item}
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                );
+                                            })}
+                                        </View>
+
                                         <Text style={MinhasOSStye.input_label}>Título da OS</Text>
                                         <TextInput
                                             style={MinhasOSStye.input}
@@ -270,15 +330,19 @@ export function MinhasOS({ navigation }) {
                                     <TouchableOpacity
                                         style={[MinhasOSStye.action_button, MinhasOSStye.cancel_button]}
                                         onPress={() => setIsEditing(false)}
+                                        disabled={loadingSave}
                                     >
                                         <Text style={MinhasOSStye.cancel_button_text}>Cancelar</Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
-                                        style={[MinhasOSStye.action_button, MinhasOSStye.save_button]}
+                                        style={[MinhasOSStye.action_button, MinhasOSStye.save_button, loadingSave && { opacity: 0.6 }]}
                                         onPress={salvarEdicao}
+                                        disabled={loadingSave}
                                     >
-                                        <Text style={MinhasOSStye.save_button_text}>Salvar</Text>
+                                        <Text style={MinhasOSStye.save_button_text}>
+                                            {loadingSave ? "Salvando..." : "Salvar"}
+                                        </Text>
                                     </TouchableOpacity>
                                 </View>
                             )}

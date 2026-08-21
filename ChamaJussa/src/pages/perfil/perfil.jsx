@@ -11,7 +11,7 @@ export function Perfil () {
     const navigation = useNavigation()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
     const [name, setName] = useState('Torolho')
-    const [email, setEmail] = useState('felipetorolho@yakult.com')
+    const [email, setEmail] = useState('torolho@gmail.com')
     const [editName, setEditName] = useState(name)
     const [editEmail, setEditEmail] = useState(email)
     const [photo, setPhoto] = useState()

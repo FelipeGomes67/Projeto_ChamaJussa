@@ -1,10 +1,11 @@
 import axios from "axios";
+import { Alert } from "react-native";
 
 const apiPort = "5003";
 const localapi = `http://192.168.137.1:${apiPort}/api`;
 export const localAPIImagePath = `http://192.168.137.1:${apiPort}/api`;
 
-const api = axios.create({  
+const api = axios.create({
     baseURL: localapi
 });
 
@@ -144,34 +145,39 @@ export const postOS = async (e, titulo, equipamento, local, descricao, imagem, s
     if (e && typeof e.preventDefault === 'function') {
         e.preventDefault();
     }
-    if (!titulo || titulo.trim().length === 0) {
-        alert("Preencha o campo de titulo corretamente");
+
+    const txtTitulo = String(titulo || '').trim();
+    const txtEquipamento = String(equipamento || '').trim();
+    const txtLocal = String(local || '').trim();
+    const txtDescricao = String(descricao || '').trim();
+
+    if (!txtTitulo) {
+        Alert.alert("Preencha o campo de título corretamente");
         return;
     }
-    if (!equipamento || equipamento.trim().length === 0) {
-        alert("Preencha o campo de equipamento corretamente");
+    if (!txtEquipamento) {
+        Alert.alert("Preencha o campo de equipamento corretamente");
         return;
     }
-    if (!local || local.trim().length === 0) {
-        alert("Preencha o campo de local corretamente");
+    if (!txtLocal) {
+        Alert.alert("Preencha o campo de local corretamente");
         return;
     }
-    if (!descricao || descricao.trim().length === 0) {
-        alert("Preencha o campo de descricao corretamente");
-        return;
-    }
-    if (!imagem) {
-        alert("Selecione um arquivo de imagem válido");
+    if (!txtDescricao) {
+        Alert.alert("Preencha o campo de descrição corretamente");
         return;
     }
 
     const formData = new FormData();
-    formData.append("Titulo", titulo);
-    formData.append("Equipamento", equipamento);
-    formData.append("Local", local);
-    formData.append("Descricao", descricao);
-    formData.append("Imagem", imagem);
+    formData.append("Titulo", txtTitulo);
+    formData.append("Equipamento", txtEquipamento);
+    formData.append("Local", txtLocal);
+    formData.append("Descricao", txtDescricao);
     formData.append("Status", status || "Aberto");
+
+    if (imagem) {
+        formData.append("Imagem", imagem);
+    }
 
     try {
         const retornoAPI = await api.post("/OrdemServico", formData, {
@@ -181,14 +187,13 @@ export const postOS = async (e, titulo, equipamento, local, descricao, imagem, s
         });
 
         if (retornoAPI.status === 201) {
-            alert("Ordem de serviço cadastrada com sucesso!");
+            Alert.alert("Ordem de serviço cadastrada com sucesso!");
             return retornoAPI.data;
         }
     } catch (error) {
         erro("Cadastrar OS", error);
     }
 };
-
 export const deleteOS = async (id) => {
     try {
         const retornoAPI = await api.delete(`/OrdemServico/${id}`);
@@ -204,19 +209,19 @@ export const deleteOS = async (id) => {
 
 export const putOS = async (id, titulo, equipamento, local, descricao, imagem, status) => {
     if (!titulo || titulo.trim().length === 0) {
-        alert("Preencha o campo de título corretamente");
+        Alert.alert("Preencha o campo de título corretamente");
         return;
     }
     if (!equipamento || equipamento.trim().length === 0) {
-        alert("Preencha o campo de equipamento corretamente");
+        Alert.alert("Preencha o campo de equipamento corretamente");
         return;
     }
     if (!local || local.trim().length === 0) {
-        alert("Preencha o campo de local corretamente");
+        Alert.alert("Preencha o campo de local corretamente");
         return;
     }
     if (!descricao || descricao.trim().length === 0) {
-        alert("Preencha o campo de descrição corretamente");
+        Alert.alert("Preencha o campo de descrição corretamente");
         return;
     }
 
@@ -229,6 +234,9 @@ export const putOS = async (id, titulo, equipamento, local, descricao, imagem, s
 
     if (imagem) {
         formData.append("Imagem", imagem);
+    } else {
+        const emptyFile = new Blob([""], { type: "image/png" });
+        formData.append("Imagem", emptyFile, "dummy.png");
     }
 
     try {
@@ -239,7 +247,7 @@ export const putOS = async (id, titulo, equipamento, local, descricao, imagem, s
         });
 
         if (retornoAPI.status === 200 || retornoAPI.status === 204) {
-            alert("Ordem de serviço atualizada com sucesso!");
+            Alert.alert("Ordem de serviço atualizada com sucesso!");
             return true;
         }
     } catch (error) {

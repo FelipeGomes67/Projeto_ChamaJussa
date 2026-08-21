@@ -47,7 +47,7 @@ export const CriarOSStyle = StyleSheet.create({
         borderWidth: 1,
         borderStyle: 'solid',
         borderRadius: 3,
-        height: 60,
+        height: 80,
         textAlignVertical: 'top',
     },
     PlaceholderText: {

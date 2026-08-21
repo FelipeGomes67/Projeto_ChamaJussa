@@ -157,7 +157,7 @@ public class UsuarioController : ControllerBase
     public async Task<IActionResult> Deletar(Guid id)
     {
         var usuario = await _usuarioRepository.ObterPorIdAsync(id);
-        if (usuario == null)
+        if (usuario == null)    
             return NotFound(new { mensagem = "Usuário não encontrado." });
 
         await _usuarioRepository.DeletarAsync(id);

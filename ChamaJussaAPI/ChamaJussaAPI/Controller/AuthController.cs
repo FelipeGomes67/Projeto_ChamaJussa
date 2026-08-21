@@ -1,7 +1,7 @@
 ﻿using ChamaJussaAPI.DTOs;
 using ChamaJussaAPI.Interfaces;
 using ChamaJussaAPI.Services;
-using ChamaJussaAPI.Utils; // Adicionado para acessar o Criptografia
+using ChamaJussaAPI.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChamaJussaAPI.Controllers;
